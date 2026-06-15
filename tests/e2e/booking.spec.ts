@@ -154,7 +154,7 @@ test.describe("Booking page", () => {
 
     const tz = await page.getByLabel("Timezone").inputValue();
     expect(tz).toBeTruthy();
-    expect(tz).toContain("/");
+    expect(tz).toMatch(/^([A-Za-z_]+\/[A-Za-z_]+|UTC)$/);
   });
 
   test("clicking selected slot again keeps form visible", async ({ page }) => {
