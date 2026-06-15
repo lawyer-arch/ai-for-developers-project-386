@@ -8,3 +8,5 @@ __pycache__/
 node_modules/
 tsp-output/
 *.egg-info/
+playwright-report/
+test-results/

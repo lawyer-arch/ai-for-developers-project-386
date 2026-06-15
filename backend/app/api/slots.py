@@ -49,16 +49,14 @@ async def get_available_slots(
 
     candidates = []
     for window in windows:
-        start_parts = window.start_time.split(":")
-        end_parts = window.end_time.split(":")
         slot_start = datetime.combine(
             target_date,
-            time(int(start_parts[0]), int(start_parts[1])),
+            window.start_time,
             tzinfo=host_tz,
         )
         slot_end = datetime.combine(
             target_date,
-            time(int(end_parts[0]), int(end_parts[1])),
+            window.end_time,
             tzinfo=host_tz,
         )
         current = slot_start
@@ -106,7 +104,7 @@ async def get_available_slots(
 async def get_slots(
     username: str,
     slug: str,
-    date: str = Query(..., description="Date in YYYY-MM-DD format"),
+    date_str: str = Query(..., alias="date", description="Date in YYYY-MM-DD format"),
     timezone: str = Query(default="Europe/Moscow"),
     db: AsyncSession = Depends(get_db),
 ) -> SlotsResponse:
@@ -134,11 +132,11 @@ async def get_slots(
 
     # Parse date
     try:
-        target_date = date.fromisoformat(date)
+        target_date = date.fromisoformat(date_str)
     except ValueError:
         raise HTTPException(status_code=422, detail="Invalid date format. Use YYYY-MM-DD")
 
     # Get available slots
     slots = await get_available_slots(event_type, target_date, timezone, db)
 
-    return SlotsResponse(date=date, timezone=timezone, slots=slots)
+    return SlotsResponse(date=date_str, timezone=timezone, slots=slots)

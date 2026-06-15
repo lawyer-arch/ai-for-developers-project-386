@@ -32,3 +32,29 @@
 ## Работа с Git
 
 - запрещены любые операции с Git
+
+## Формат коммитов (Conventional Commits)
+
+Все коммиты (включая те, которые делает агент) должны соответствовать спецификации [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<тип>(<область>): <описание>
+
+[опциональное тело]
+
+[опциональные footer]
+```
+
+**Типы:** `feat`, `fix`, `chore`, `docs`, `test`, `refactor`, `ci`, `build`, `style`, `perf`
+
+**Примеры:**
+- `feat: add Playwright e2e tests for booking flow`
+- `fix(api): correct slot time filtering`
+- `chore: update Docker Compose configuration`
+- `docs: update README with CI instructions`
+- `test(e2e): add booking scenario test`
+- `ci: add GitHub Actions workflow for e2e`
+
+**Области (scope):** `api`, `frontend`, `backend`, `docker`, `e2e`, `spec` — по усмотрению.
+
+Этот формат используется release-please для автоматического определения версии (semver) и формирования CHANGELOG.
