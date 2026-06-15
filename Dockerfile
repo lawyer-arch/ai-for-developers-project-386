@@ -11,11 +11,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
-COPY pyproject.toml uv.lock ./
+COPY code/pyproject.toml code/uv.lock ./
 RUN uv sync --frozen
 
-COPY . .
+COPY code/ .
 
-EXPOSE 8000
+EXPOSE 8080
 
-CMD ["sh", "-c", "uv run python -m app.seed && uv run uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8000}"]
+CMD ["sh", "-c", "uv run python -m app.seed && uv run uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-8080}"]

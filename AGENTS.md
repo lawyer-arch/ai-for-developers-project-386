@@ -3,10 +3,10 @@
 ## Hexlet project (ai-for-developers-project-386)
 
 - **Не редактировать** `.github/workflows/hexlet-check.yml` — автоматически генерируется Hexlet и возвращается при каждой проверке.
-- Пока нет Python, JS или других исходных файлов; репозиторий представляет собой заглушку, содержащую только README.md и CI.
-- Тесты запускаются автоматически через CI Hexlet при каждом нажатии (не настраивается локально).
-- Локальные инструменты сборки/тестирования/проверки не настроены. Добавьте инструменты, необходимые для выполнения задачи.
-— Значок GitHub в README.md указывает на статус Hexlet CI.
+- **Структура проекта**: бэкенд в `code/`, симлинк `backend/` → `code/`. Фронтенд в `frontend/`. Спецификация в `spec/`.
+- Тесты запускаются автоматически через CI Hexlet при каждом нажатии.
+- Локальные инструменты: `make install`, `make test`, `make lint`, `make e2e`.
+- **Не пушить** — коммиты допускаются, push выполняет пользователь.
 - Ответы только на русском языке.
 
 ## Подход к разработке
@@ -26,12 +26,37 @@
 - **БД**: SQLite (единственная, время — UTC).
 - **Auth**: JWT (хост); страница бронирования публична.
 - **Тесты**: pytest + httpx + factory_boy. Качество: ruff + mypy. Менеджер: uv.
-- **Фронтенд**: Next.js + TypeScript (реализуется позже).
-- **Инфраструктура**: `Makefile` с задачами: `install`, `compile-spec`, `lint`, `test`, `dev`, `migrate`.
+- **Фронтенд**: Next.js + TypeScript, Tailwind CSS. Тесты: vitest + React Testing Library.
+- **Инфраструктура**: `Makefile` с задачами: `install`, `compile-spec`, `lint`, `test`, `dev`, `migrate`, `e2e`, `docker-*`.
+- **Тестирование**: pytest + httpx + factory_boy (бэкенд), vitest (фронтенд), Playwright (e2e).
+- **Качество**: ruff + mypy (бэкенд), eslint (фронтенд).
+- **CI/CD**: GitHub Actions (Playwright e2e), release-please (Conventional Commits).
 
 ## Работа с Git
 
-- запрещены любые операции с Git
+- допускается commit; push выполняет пользователь
+
+## Формат коммитов (Conventional Commits)
+
+Все коммиты (включая те, которые делает агент) должны соответствовать спецификации [Conventional Commits](https://www.conventionalcommits.org/):
+
+```
+<тип>(<область>): <описание>
+
+[опциональное тело]
+
+[опциональные footer]
+```
+
+**Типы:** `feat`, `fix`, `chore`, `docs`, `test`, `refactor`, `ci`, `build`, `style`, `perf`
+
+**Примеры:**
+- `feat: add Playwright e2e tests for booking flow`
+- `fix(api): correct slot time filtering`
+- `chore: update Docker Compose configuration`
+- `docs: update README with CI instructions`
+- `test(e2e): add booking scenario test`
+- `ci: add GitHub Actions workflow for e2e`
 
 **Области (scope):** `api`, `frontend`, `backend`, `docker`, `e2e`, `spec` — по усмотрению.
 
