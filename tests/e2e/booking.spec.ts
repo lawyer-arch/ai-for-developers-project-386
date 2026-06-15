@@ -17,11 +17,10 @@ test.describe("Booking flow", () => {
     await page.goto("/");
 
     // 2. Ждём загрузки списка event types
-    await expect(page.getByText("Event Types")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Event Types" })).toBeVisible();
 
     // 3. Убеждаемся, что виден "Consultation"
-    const consultationCard = page.getByText("Consultation").first();
-    await expect(consultationCard).toBeVisible();
+    await expect(page.getByText("Consultation").first()).toBeVisible();
 
     // 4. Нажимаем "View booking page" → переход на страницу бронирования
     await page.getByText("View booking page").first().click();
@@ -62,10 +61,10 @@ test.describe("Booking flow", () => {
   test("homepage shows event types list", async ({ page }) => {
     await page.goto("/");
 
-    await expect(page.getByText("Event Types")).toBeVisible();
-    await expect(page.getByText("Consultation")).toBeVisible();
-    await expect(page.getByText("/consult")).toBeVisible();
-    await expect(page.getByText("30 min")).toBeVisible();
+    await expect(page.getByRole("heading", { name: "Event Types" })).toBeVisible();
+    await expect(page.getByText("Consultation").first()).toBeVisible();
+    await expect(page.getByText("/consult").first()).toBeVisible();
+    await expect(page.getByText("30 min").first()).toBeVisible();
   });
 
   test("booking page shows event details", async ({ page }) => {
