@@ -1,4 +1,6 @@
-from pydantic import BaseModel, Field
+from datetime import time
+
+from pydantic import BaseModel, Field, model_validator
 
 
 class AvailabilityResponse(BaseModel):
@@ -9,6 +11,18 @@ class AvailabilityResponse(BaseModel):
     specific_date: str | None = None
 
     model_config = {"from_attributes": True}
+
+    @model_validator(mode="before")
+    @classmethod
+    def _convert_times(cls, values: object) -> dict:
+        if isinstance(values, dict):
+            return values
+        attrs = {k: v for k, v in vars(values).items() if not k.startswith("_")}
+        for field in ("start_time", "end_time"):
+            val = attrs.get(field)
+            if isinstance(val, time):
+                attrs[field] = val.strftime("%H:%M")
+        return attrs
 
 
 class ScheduleBase(BaseModel):
