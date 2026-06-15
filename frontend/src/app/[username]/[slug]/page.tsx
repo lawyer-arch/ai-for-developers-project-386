@@ -158,10 +158,11 @@ export default function BookingPage() {
             </h2>
 
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label htmlFor="booking-date" className="block text-sm font-medium text-gray-700 mb-2">
                 Pick a date
               </label>
               <input
+                id="booking-date"
                 type="date"
                 value={selectedDate}
                 onChange={(e) => setSelectedDate(e.target.value)}
@@ -222,10 +223,11 @@ export default function BookingPage() {
                 </h3>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                     Name *
                   </label>
                   <input
+                    id="name"
                     type="text"
                     required
                     value={form.name}
@@ -237,10 +239,11 @@ export default function BookingPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                     Email *
                   </label>
                   <input
+                    id="email"
                     type="email"
                     required
                     value={form.email}
@@ -252,10 +255,11 @@ export default function BookingPage() {
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">
+                  <label htmlFor="timeZone" className="block text-sm font-medium text-gray-700">
                     Timezone
                   </label>
                   <input
+                    id="timeZone"
                     type="text"
                     value={form.timeZone}
                     onChange={(e) =>
