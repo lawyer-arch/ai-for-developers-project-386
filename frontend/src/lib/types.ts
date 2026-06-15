@@ -20,6 +20,7 @@ export interface EventType {
   location?: string;
   scheduleId?: number;
   owner_id: number;
+  owner_username: string;
   createdAt: string;
 }
 

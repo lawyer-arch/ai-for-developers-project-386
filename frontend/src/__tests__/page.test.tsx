@@ -31,6 +31,7 @@ describe("Home Page", () => {
         afterEventBuffer: 0,
         requiresConfirmation: false,
         owner_id: 1,
+        owner_username: "demo",
         createdAt: "2026-01-01T00:00:00Z",
       },
     ]);
@@ -40,7 +41,7 @@ describe("Home Page", () => {
     await waitFor(() => {
       expect(screen.getByText("Consultation")).toBeInTheDocument();
     });
-    expect(screen.getByText("/consult")).toBeInTheDocument();
+    expect(screen.getByText("/demo/consult")).toBeInTheDocument();
     expect(screen.getByText("Duration: 30 min")).toBeInTheDocument();
   });
 

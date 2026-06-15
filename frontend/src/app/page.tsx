@@ -69,7 +69,7 @@ export default function Home() {
                 {et.title}
               </h2>
               <p className="text-sm text-gray-500 mb-4">
-                /{et.slug}
+                /{et.owner_username}/{et.slug}
               </p>
               <div className="space-y-1 text-sm text-gray-600">
                 <p>Duration: {et.length} min</p>
@@ -82,7 +82,7 @@ export default function Home() {
               </div>
               <div className="mt-4 pt-4 border-t border-gray-100">
                 <Link
-                  href={`/${et.slug}`}
+                  href={`/${et.owner_username}/${et.slug}`}
                   className="text-blue-600 hover:text-blue-800 text-sm"
                 >
                   View booking page

@@ -63,7 +63,7 @@ test.describe("Booking flow", () => {
 
     await expect(page.getByRole("heading", { name: "Event Types" })).toBeVisible();
     await expect(page.getByText("Consultation").first()).toBeVisible();
-    await expect(page.getByText("/consult").first()).toBeVisible();
+    await expect(page.getByText("/demo/consult").first()).toBeVisible();
     await expect(page.getByText("30 min").first()).toBeVisible();
   });
 

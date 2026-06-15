@@ -32,6 +32,7 @@ describe("API Client", () => {
           afterEventBuffer: 0,
           requiresConfirmation: false,
           owner_id: 1,
+          owner_username: "demo",
           createdAt: "2026-01-01T00:00:00Z",
         },
       ];
@@ -79,6 +80,7 @@ describe("API Client", () => {
         afterEventBuffer: 0,
         requiresConfirmation: false,
         owner_id: 1,
+        owner_username: "demo",
         createdAt: "2026-01-01T00:00:00Z",
       };
 

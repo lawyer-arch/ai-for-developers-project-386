@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, model_validator
 
 
 class EventTypeBase(BaseModel):
@@ -24,6 +24,22 @@ class EventTypeCreate(EventTypeBase):
 class EventTypeResponse(EventTypeBase):
     id: int
     owner_id: int
+    owner_username: str
     created_at: datetime
 
     model_config = {"from_attributes": True}
+
+    @model_validator(mode="before")
+    @classmethod
+    def _extract_owner_username(cls, values: object) -> dict:
+        if isinstance(values, dict):
+            return values
+        owner = getattr(values, "owner", None)
+        username = getattr(owner, "username", "") if owner else ""
+        attrs = {
+            k: v
+            for k, v in vars(values).items()
+            if not k.startswith("_")
+        }
+        attrs["owner_username"] = username
+        return attrs
