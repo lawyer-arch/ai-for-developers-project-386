@@ -1,17 +1,21 @@
-FROM python:3.12-slim
+FROM python:3.12-slim AS base
+
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1
 
 WORKDIR /app
 
-RUN pip install --quiet \
-    fastapi>=0.115.0 \
-    "uvicorn[standard]>=0.34.0" \
-    "sqlalchemy[asyncio]>=2.0.0" \
-    aiosqlite>=0.20.0 \
-    alembic>=1.14.0 \
-    "pydantic[email]>=2.0.0" \
-    pydantic-settings>=2.0.0 \
-    pytest>=8.0.0 \
-    pytest-asyncio>=0.24.0 \
-    httpx>=0.28.0
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-CMD ["pytest", "--version"]
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
+
+COPY pyproject.toml uv.lock ./
+RUN uv sync --frozen
+
+COPY . .
+
+EXPOSE 8000
+
+CMD ["sh", "-c", "uv run python -m app.seed && uv run uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload"]

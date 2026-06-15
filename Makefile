@@ -1,13 +1,10 @@
 .PHONY: install compile-spec lint test dev migrate seed clean \
        frontend-install frontend-dev frontend-build frontend-lint frontend-test \
        docker-build docker-up docker-down docker-logs \
-       e2e e2e-install setup code-setup
+       e2e e2e-install setup
 
 setup: install
 	@echo "Setup complete"
-
-code-setup:
-	docker build -t calendar-slot-code:local -f code/Dockerfile code
 
 install:
 	uv sync
