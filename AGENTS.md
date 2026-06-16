@@ -19,6 +19,10 @@
 - **Спецификация API**: `/home/pavel/My_folder/my_works/Hexlet/ai-for-developers-project-386` — единый источник правды для обеих частей приложения.
 - **Исследование cal.com**: `/home/pavel/My_folder/my_works/Hexlet/ai-for-developers-project-386/docs/research-calcom.md` — используем для ориентира при разработке.
 
+## Устранение багов
+
+- не устраняй следствие ошибки, найди причину и предлагай варианты устранения проблемы как первопричины.
+
 ## Стек разработки
 
 - **Контракт**: TypeSpec (`spec/main.tsp`) → компиляция в OpenAPI 3.1 (`spec/tsp-output/openapi.yaml`).
